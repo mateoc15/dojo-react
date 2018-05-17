@@ -1,87 +1,100 @@
 import React, { Component } from 'react';
+  import logo from './logo.svg';
+  import './App.css';
+  import Creador from './creador/Creador';
+  import Visualizador from './visualizador/Visualizador';
 
-import logo from './logo.svg';
-import './App.css';
-import PropTypes from 'prop-types';
-import Creador from './creador/Creador.js';
-import Visualizador from './visualizador/Visualizador.js';
+  class App extends Component {
+    constructor(){
+      super();
+      this.state = {
+          tituloArticulo : '',
+          cuerpoArticulo : '',
+          referenciasArticulo : '',
+          urlArticulo : '',
+          colorTitulo: '',
+          tamanoTitulo: '',
+          letraTitulo: '',
+          colorCuerpo: '',
+          tamanoCuerpo: '',
+          letraCuerpo: ''
+      }
+      this.getData = this.getData.bind(this);
+    }
 
-//import VisualizadorMovil from './visualizador/VisualizadorMovil.js';
-//import CreadorMovil from './creador/CreadorMovil.js';
+    getData(tituloR, cuerpoR, refR, urlR, colorTituloR, tamanoTituloR, letraTituloR, colorCuerpoR, tamanoCuerpoR, letraCuerpoR){
+      this.setState({
+        tituloArticulo : tituloR,
+        cuerpoArticulo : cuerpoR,
+        referenciasArticulo : refR,
+        urlArticulo : urlR,
+        colorTitulo: colorTituloR,
+        tamanoTitulo: tamanoTituloR,
+        letraTitulo: letraTituloR,
+        colorCuerpo: colorCuerpoR ,
+        tamanoCuerpo: tamanoCuerpoR,
+        letraCuerpo: letraCuerpoR
+      })
+    }
 
-class App extends Component {
-  constructor(){
-    super();
-    this.state = ({
-      tituloArticulo: '',
-      cuerpoArticulo: '',
-      referenciasArticulo: '',
-      urlArticulo: ''
-    });
-    this.getData = this.getData.bind(this);
-  }
 
-  getData(tituloR, cuerpoR, refR, urlR){
-    this.setState({
-    tituloArticulo: tituloR,
-    cuerpoArticulo: cuerpoR,
-    referenciasArticulo: refR,
-    urlArticulo: urlR,
-    })
-
-  }
-
-  changeColor(){
-         this.setState({bgColor: !this.state.color_black})
-     }
+    setEstilo(clave, valor){
+      document.getElementsByClassName('text').style[clave] = valor;
+    }
 
     render() {
-      const{
+      const {
         tituloArticulo,
         cuerpoArticulo,
         referenciasArticulo,
-        urlArticulo
+        urlArticulo,
+        colorTitulo,
+        tamanoTitulo,
+        letraTitulo,
+        colorCuerpo,
+        tamanoCuerpo,
+        letraCuerpo
       } = this.state;
-        return (
-          <div className = "App" >
-            <header className = "App-header" >
-            <img src = { logo } className = "App-logo" alt = "logo" / >
-            <h1 className = "App-title" > Welcome to React
-            < /h1>
-            </header>
-            <table className="tabla">
-              <tbody>
-                <tr>
-                  <th>Publicador</th>
-                  <th>Visualizador</th>
-                </tr>
-                <tr>
-                  <td>
-                    <Creador sendData={this.getData}/>
-                  </td>
-                  <td>
-                    <Visualizador titulo={tituloArticulo}
-                                  cuerpo={cuerpoArticulo}
-                                  referencias={referenciasArticulo}
-                                  url={urlArticulo}/>
-                  </td>
-                </tr>
-              </tbody>
+
+      return (
+        <div className="App">
+          <header className="App-header">
+            <img src={logo} className="App-logo" alt="logo" />
+            <h1 className="App-title">Dojo React</h1>
+          </header>
+          <div className="App-intro">
+
+
+         <table className="tabla">
+            <tbody>
+              <tr>
+                <th>Publicador</th>
+                <th>Visualizador</th>
+              </tr>
+              <tr>
+                <td>
+                  <Creador sendData={this.getData}/>
+                </td>
+                <td>
+                <Visualizador titulo = {tituloArticulo}
+                                cuerpo = {cuerpoArticulo}
+                                referencias = {referenciasArticulo}
+                                url = {urlArticulo}
+                                colortitulo = {colorTitulo}
+                                tamanotitulo = {tamanoTitulo}
+                                letratitulo = {letraTitulo}
+                                colorcuerpo = {colorCuerpo}
+                                tamanocuerpo = {tamanoCuerpo}
+                                letracuerpo = {letraCuerpo}
+                                />
+                </td>
+              </tr>
+            </tbody>
             </table>
-
-            <input
-            Cambiar vista
-            name="isGoing"
-            type="checkbox"
-            checked={this.state.isGoing}
-            onChange={this.handleInputChange} />
-            <label>
-            Cambiar vista
-            </label>
-
-            </div>
-        );
+          </div>
+        </div>
+      );
     }
-}
+  }
 
-export default App;
+  export default App;
